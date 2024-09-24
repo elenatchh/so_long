@@ -6,7 +6,7 @@
 /*   By: elefonta <elefonta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 12:25:58 by elefonta          #+#    #+#             */
-/*   Updated: 2024/09/18 14:24:19 by elefonta         ###   ########.fr       */
+/*   Updated: 2024/09/24 09:17:01 by elefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <string.h>
 # include <stdlib.h>
 # include <stdbool.h>
+# include <fcntl.h>
 
 # include "structures.h"
 # include "mlx.h"
@@ -57,5 +58,8 @@ int		exit_game(t_data *data);
 void	ft_error(t_data *data, char *str);
 void	free_all(t_data *data);
 void	destroy_img(t_data *data);
+
+void	map_reader(t_data *data, char *argv);
+void	create_map(t_data *data, char *argv);
 
 #endif

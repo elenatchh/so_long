@@ -6,7 +6,7 @@
 #    By: elefonta <elefonta@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/13 10:03:42 by elefonta          #+#    #+#              #
-#    Updated: 2024/09/16 15:28:01 by elefonta         ###   ########.fr        #
+#    Updated: 2024/09/24 09:08:28 by elefonta         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -g3
 
 
-SRCS_noprefix = main.c map_parser.c free_errors.c
+SRCS_noprefix = main.c map_parser.c free_errors.c map.c
 
 INCLUDES = -I./include -I./libft -I./minilibx-linux
 

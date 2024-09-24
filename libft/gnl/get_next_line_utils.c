@@ -6,7 +6,7 @@
 /*   By: elefonta <elefonta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 12:50:45 by elefonta          #+#    #+#             */
-/*   Updated: 2024/04/25 11:58:49 by elefonta         ###   ########.fr       */
+/*   Updated: 2024/09/23 13:13:57 by elefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	}
 	if (!s1 || !s2)
 		return (NULL);
-	sj = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2)) + 1);
+	sj = malloc(sizeof(char) * (ft_strlens(s1) + ft_strlens(s2)) + 1);
 	if (!sj)
 		return (NULL);
 	while (s1[++i])
@@ -40,7 +40,7 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (free(s1), sj);
 }
 
-size_t	ft_strlen(const char *s)
+size_t	ft_strlens(const char *s)
 {
 	size_t	len;
 

@@ -6,7 +6,7 @@
 /*   By: elefonta <elefonta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 15:01:02 by elefonta          #+#    #+#             */
-/*   Updated: 2024/09/18 13:10:06 by elefonta         ###   ########.fr       */
+/*   Updated: 2024/09/23 13:22:59 by elefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,13 @@ typedef struct s_square
 	void		*bg;
 }				t_square;
 
+typedef struct map
+{
+	char 	**map;
+	int		line;
+	int		column;
+}			t_map;
+
 typedef	struct s_mlx
 {
 	void	*mlx_pointer;
@@ -35,6 +42,7 @@ typedef	struct s_data
 {
 	t_mlx		mlx;
 	t_square	square;
+	t_map		map;
 }				t_data;
 
 

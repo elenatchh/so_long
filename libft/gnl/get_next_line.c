@@ -6,7 +6,7 @@
 /*   By: elefonta <elefonta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 12:49:45 by elefonta          #+#    #+#             */
-/*   Updated: 2024/04/26 11:58:49 by elefonta         ###   ########.fr       */
+/*   Updated: 2024/09/23 13:14:09 by elefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_next_line(char *str)
 		i++;
 	if (!str[i])
 		return (free(str), NULL);
-	buf = malloc(sizeof(char) * (ft_strlen(str) - i));
+	buf = malloc(sizeof(char) * (ft_strlens(str) - i));
 	if (!buf)
 		return (free(str), NULL);
 	j = i + 1;

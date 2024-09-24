@@ -6,7 +6,7 @@
 /*   By: elefonta <elefonta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/22 12:50:58 by elefonta          #+#    #+#             */
-/*   Updated: 2024/09/13 12:40:21 by elefonta         ###   ########.fr       */
+/*   Updated: 2024/09/23 13:14:25 by elefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_get_line(char *str);
 char	*ft_strjoin(char *s1, char *s2);
 char	*ft_next_line(char *str);
 
-size_t	ft_strlen(const char *s);
+size_t	ft_strlens(const char *s);
 char	*ft_free_string(char *str);
 int		ft_is_new_line(char *str);
 
