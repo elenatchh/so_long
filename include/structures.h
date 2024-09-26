@@ -6,7 +6,7 @@
 /*   By: elefonta <elefonta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 15:01:02 by elefonta          #+#    #+#             */
-/*   Updated: 2024/09/23 13:22:59 by elefonta         ###   ########.fr       */
+/*   Updated: 2024/09/26 14:24:21 by elefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,35 +15,50 @@
 
 # include "so_long.h"
 
+typedef struct s_image
+{
+	void		*img;
+	char		*addr;
+	int			h;
+	int			w;
+	int			bpp;
+	int			size_line;
+	int			endian;
+}				t_image;
+
 typedef struct s_square
 {
-	void		*wall;
-	void		*floor;
-	void		*player;
-	void		*collectible;
-	void		*exit;
-	void		*bg;
+	t_image		wall;
+	t_image		floor;
+	t_image		player;
+	t_image		collectible;
+	t_image		exit;
+	t_image		image;
 }				t_square;
 
 typedef struct map
 {
-	char 	**map;
-	int		line;
-	int		column;
-}			t_map;
+	char		**map;
+	char		**copymap;
+	int			line;
+	int			column;
+}				t_map;
 
-typedef	struct s_mlx
+typedef struct countitem
 {
-	void	*mlx_pointer;
-	void	*windows;
-}				t_mlx;
+	int			player;
+	int			collectible;
+	int			exit;
+}				t_countitem;
 
-typedef	struct s_data
+typedef struct s_data
 {
-	t_mlx		mlx;
+	void		*mlx;
+	void		*win;
 	t_square	square;
 	t_map		map;
+	t_countitem	countitem;
+	int			fd;
 }				t_data;
-
 
 #endif

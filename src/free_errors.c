@@ -6,7 +6,7 @@
 /*   By: elefonta <elefonta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 15:13:28 by elefonta          #+#    #+#             */
-/*   Updated: 2024/09/18 14:33:22 by elefonta         ###   ########.fr       */
+/*   Updated: 2024/09/26 14:32:58 by elefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,52 +15,51 @@
 
 void	ft_error(t_data *data, char *str)
 {
-	write(2, "error : ", 9);
-	
-	while(*str)
-	{
-		write(2, str, 1);
-		str++;
-	}
+	write(2, "Error: ", 7);
+	if (str)
+		write(2, str, ft_strlen(str));
 	write(2, "\n", 1);
 	free_all(data);
 	exit(EXIT_FAILURE);
 }
 void	destroy_img(t_data *data)
 {
-	if (data->square.bg)
-		mlx_destroy_image(data->mlx.mlx_pointer, data->square.bg);
-	if (data->square.wall)
-		mlx_destroy_image(data->mlx.mlx_pointer, data->square.wall);
-	if (data->square.collectible)
-		mlx_destroy_image(data->mlx.mlx_pointer, data->square.collectible);
-	if (data->square.player)
-		mlx_destroy_image(data->mlx.mlx_pointer, data->square.player);
-	if (data->square.floor)
-		mlx_destroy_image(data->mlx.mlx_pointer, data->square.floor);
-	if (data->square.exit)
-		mlx_destroy_image(data->mlx.mlx_pointer, data->square.exit);
+	if (data->square.wall.img) {
+		mlx_destroy_image(data->mlx, data->square.wall.img);
+		printf("image destroy l29 free_errors.c\n");
+	}
+	if (data->square.collectible.img)
+		mlx_destroy_image(data->mlx, data->square.collectible.img);
+	if (data->square.player.img)
+		mlx_destroy_image(data->mlx, data->square.player.img);
+	if (data->square.floor.img)
+		mlx_destroy_image(data->mlx, data->square.floor.img);
+	if (data->square.exit.img)
+		mlx_destroy_image(data->mlx, data->square.exit.img);
 }
 
 void	free_all(t_data *data)
 {
-	if (!data)
-		return ;
 	destroy_img(data);
-	if (data->mlx.windows != NULL)
-		mlx_destroy_window(data->mlx.mlx_pointer, data->mlx.windows);
-	if (data->mlx.mlx_pointer != NULL)
+	if (data->fd != 0)
+		close(data->fd);
+	if (data->win != NULL)
+		mlx_destroy_window(data->mlx, data->win);
+	if (data->mlx != NULL)
 	{
-		mlx_destroy_display(data->mlx.mlx_pointer);
-		free(data->mlx.mlx_pointer);
+		printf("free mlx l50\n");
+		// mlx_destroy_display(data->mlx);
+		free(data->mlx);
 	}
-	//Free la pasteque double tableau (la map)
+	if (data->map.map)
+		ft_free_matrix(&(data->map.map));
+	if (data->map.copymap != NULL)
+		ft_free_matrix(&(data->map.copymap));
 }
 int exit_game(t_data *data)
 {
 	free_all(data);
 	exit(EXIT_SUCCESS);
-	return (0); 
+	return (0);
 }
-
 //Faire fonction qui free tout le contenu de data si ce nest pas null

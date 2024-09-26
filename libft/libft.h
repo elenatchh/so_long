@@ -6,7 +6,7 @@
 /*   By: elefonta <elefonta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/01 12:12:09 by elefonta          #+#    #+#             */
-/*   Updated: 2024/09/13 12:41:23 by elefonta         ###   ########.fr       */
+/*   Updated: 2024/09/25 17:47:37 by elefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,6 @@ void				ft_putchar_fd(char c, int fd);
 void				ft_putstr_fd(char *str, int fd);
 void				ft_putendl_fd(char *s, int fd);
 void				ft_putnbr_fd(int nb, int fd);
+void 				ft_free_matrix(char ***str);
 
 #endif

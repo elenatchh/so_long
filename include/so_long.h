@@ -6,7 +6,7 @@
 /*   By: elefonta <elefonta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 12:25:58 by elefonta          #+#    #+#             */
-/*   Updated: 2024/09/24 09:17:01 by elefonta         ###   ########.fr       */
+/*   Updated: 2024/09/26 15:18:16 by elefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,8 @@
 # define WALL "./textures/wall.xpm"
 # define PLAYER "./textures/player.xpm"
 # define EXIT "./textures/exit.xpm"
-# define COLLECTIBLE "./textures/pumpkin1.xpm"
+# define COLLECTIBLE "./textures/collectible.xpm"
 # define FLOOR "./textures/floor.xpm"
-# define BACKGROUND "./textures/bg.xpm"
 
 # include <X11/X.h>
 # include <X11/keysym.h>
@@ -61,5 +60,11 @@ void	destroy_img(t_data *data);
 
 void	map_reader(t_data *data, char *argv);
 void	create_map(t_data *data, char *argv);
+void	put_img(t_data *data);
+void	map_verif(t_data *data, char *argv);
 
+void	verif_items(t_data *data);
+void	verif_count(t_data *data);
+void	player(t_data *data);
+void	put_img_to_img(t_image *dst, t_image src, int x, int y);
 #endif
