@@ -3,107 +3,98 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbalazs <rbalazs@student.42.fr>            +#+  +:+       +#+        */
+/*   By: elefonta <elefonta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/01/29 18:21:46 by rbalazs           #+#    #+#             */
-/*   Updated: 2024/07/03 19:45:44 by rbalazs          ###   ########.fr       */
+/*   Created: 2024/04/22 12:50:45 by elefonta          #+#    #+#             */
+/*   Updated: 2024/09/23 13:13:57 by elefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int	gnl_strlen(const char *str)
+char	*ft_strjoin(char *s1, char *s2)
 {
-	int	i;
-
-	i = 0;
-	if (!str)
-		return (0);
-	while (str[i])
-		i++;
-	return (i);
-}
-
-char	*gnl_strjoin(char *s1, const char *s2)
-{
-	char	*dest;
+	char	*sj;
 	int		i;
 	int		j;
 
-	i = 0;
+	i = -1;
 	j = 0;
 	if (!s1)
 	{
 		s1 = malloc(sizeof(char) * 1);
-		if (s1 == NULL)
+		if (!s1)
 			return (NULL);
-		s1[0] = '\0';
+		s1[0] = 0;
 	}
-	if (!s2)
+	if (!s1 || !s2)
 		return (NULL);
-	dest = malloc(sizeof(char) * (gnl_strlen(s1) + gnl_strlen(s2) + 1));
-	if (!dest)
+	sj = malloc(sizeof(char) * (ft_strlens(s1) + ft_strlens(s2)) + 1);
+	if (!sj)
 		return (NULL);
-	while (s1[i] != '\0')
-		dest[i++] = s1[j++];
-	j = 0;
-	while (s2[j] != '\0')
-		dest[i++] = s2[j++];
-	dest[i] = '\0';
-	return (free(s1), dest);
+	while (s1[++i])
+		sj[i] = s1[i];
+	while (s2[j])
+		sj[i++] = s2[j++];
+	sj[i] = '\0';
+	return (free(s1), sj);
 }
 
-bool	ft_ischr(const char *str, int c)
+size_t	ft_strlens(const char *s)
+{
+	size_t	len;
+
+	len = 0;
+	if (!s)
+		return (0);
+	while (s[len])
+		len++;
+	return (len);
+}
+
+char	*ft_free_string(char *str)
+{
+	free(str);
+	return (NULL);
+}
+
+int	ft_is_new_line(char *str)
 {
 	int	i;
 
 	i = 0;
-	if (!str)
-		return (false);
-	while (str[i])
+	if (str)
 	{
-		if (str[i] == (char)c)
-			return (true);
-		i++;
+		while (str[i])
+		{
+			if (str[i] == '\n')
+				return (1);
+			i++;
+		}
 	}
-	return (false);
+	return (0);
 }
 
-char	*gnl_strdup(const char *s1)
+char	*ft_get_line(char *str)
 {
-	char	*dup;
 	int		i;
+	int		j;
+	char	*buff;
 
 	i = 0;
-	dup = malloc(sizeof(char) * (gnl_strlen(s1) + 1));
-	if (dup == NULL)
-		return (NULL);
-	while (s1[i])
-	{
-		dup[i] = s1[i];
+	j = 0;
+	if (!str || !str[0])
+		return (0);
+	while (str[i] && str[i] != '\n')
 		i++;
-	}
-	dup[i] = '\0';
-	return (dup);
-}
-
-char	*gnl_strcpy(char *dest, const char *src)
-{
-	int	i;
-
-	i = 0;
-	while (src[i] != '\0')
+	buff = malloc(sizeof(char) * (i + 2));
+	if (!buff)
+		return (0);
+	while (j <= i)
 	{
-		dest[i] = src[i];
-		i++;
+		buff[j] = str[j];
+		j++;
 	}
-	dest[i] = '\0';
-	return (dest);
+	buff[j] = '\0';
+	return (buff);
 }
-
-/*
-int	main(void)
-{
-	printf("%s", ft_strjoin("Salut", "Ouioui"));
-}
-*/

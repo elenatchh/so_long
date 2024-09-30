@@ -6,7 +6,7 @@
 /*   By: elefonta <elefonta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 15:13:28 by elefonta          #+#    #+#             */
-/*   Updated: 2024/09/26 14:32:58 by elefonta         ###   ########.fr       */
+/*   Updated: 2024/09/30 13:20:00 by elefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,18 @@ void	destroy_img(t_data *data)
 		mlx_destroy_image(data->mlx, data->square.floor.img);
 	if (data->square.exit.img)
 		mlx_destroy_image(data->mlx, data->square.exit.img);
+	if (data->square.image.img)
+		mlx_destroy_image(data->mlx, data->square.image.img);
+		
 }
 
 void	free_all(t_data *data)
 {
 	destroy_img(data);
-	if (data->fd != 0)
-		close(data->fd);
 	if (data->win != NULL)
 		mlx_destroy_window(data->mlx, data->win);
 	if (data->mlx != NULL)
 	{
-		printf("free mlx l50\n");
 		mlx_destroy_display(data->mlx);
 		free(data->mlx);
 	}
@@ -55,6 +55,8 @@ void	free_all(t_data *data)
 		ft_free_matrix(&(data->map.map));
 	if (data->map.copymap != NULL)
 		ft_free_matrix(&(data->map.copymap));
+	if (data->fd != 0)
+		close(data->fd);
 }
 int exit_game(t_data *data)
 {
