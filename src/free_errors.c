@@ -6,12 +6,11 @@
 /*   By: elefonta <elefonta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 15:13:28 by elefonta          #+#    #+#             */
-/*   Updated: 2024/09/30 13:20:00 by elefonta         ###   ########.fr       */
+/*   Updated: 2024/09/30 13:39:35 by elefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
 
 void	ft_error(t_data *data, char *str)
 {
@@ -22,12 +21,11 @@ void	ft_error(t_data *data, char *str)
 	free_all(data);
 	exit(EXIT_FAILURE);
 }
+
 void	destroy_img(t_data *data)
 {
-	if (data->square.wall.img) {
+	if (data->square.wall.img)
 		mlx_destroy_image(data->mlx, data->square.wall.img);
-		printf("image destroy l29 free_errors.c\n");
-	}
 	if (data->square.collectible.img)
 		mlx_destroy_image(data->mlx, data->square.collectible.img);
 	if (data->square.player.img)
@@ -38,7 +36,6 @@ void	destroy_img(t_data *data)
 		mlx_destroy_image(data->mlx, data->square.exit.img);
 	if (data->square.image.img)
 		mlx_destroy_image(data->mlx, data->square.image.img);
-		
 }
 
 void	free_all(t_data *data)
@@ -58,10 +55,11 @@ void	free_all(t_data *data)
 	if (data->fd != 0)
 		close(data->fd);
 }
-int exit_game(t_data *data)
+
+int	exit_game(t_data *data)
 {
 	free_all(data);
 	exit(EXIT_SUCCESS);
 	return (0);
 }
-//Faire fonction qui free tout le contenu de data si ce nest pas null
+// Faire fonction qui free tout le contenu de data si ce nest pas null

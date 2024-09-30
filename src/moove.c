@@ -6,36 +6,33 @@
 /*   By: elefonta <elefonta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 13:03:48 by elefonta          #+#    #+#             */
-/*   Updated: 2024/09/26 11:28:20 by elefonta         ###   ########.fr       */
+/*   Updated: 2024/09/30 15:20:02 by elefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "so_long.h"
 
-static bool	flood_fill(t_data *data, int x, int y)
+void	move_player(t_data *data, int x, int y)
 {
-	static	int 		collectible = 0;
-	static	bool		exit = false;
-
-	if (data->map.copymap[y][x] == '1')
-		return (false);
-	if (data->map.copymap[y][x] == 'E')
-		exit = true;
-	if (data->map.copymap[y][x] == 'C')
-		collectible++;
-	data->map.copymap[y][x] = '1';
-	flood_fill(data, x + 1, y);
-	flood_fill(data, x - 1, y);
-	flood_fill(data, x, y + 1);
-	flood_fill(data, x, y - 1);
-	return(collectible == data->countitem.collectible && exit);
+	if (data->map.map[y][x] != '1')
+	{
+		data->pos.x = x;
+		data->pos.y = y;
+		if ()
+		// put_img_to_img(data->square.image, data->square.floor,
+		// 			data->pos.x * 60, data->pos.y * 60);
+		put_img_to_img(data->square.image, data->square.player,
+					data->pos.x * 60, data->pos.y * 60);
+		mlx_put_image_to_window(data->mlx, data->win, data->square.image.img, 0, 0);
+		printf("x : %d\n", data->pos.x);
+		printf("y : %d\n", data->pos.y);
+	}
 }
 
-void	player(t_data *data)
+void find_player(t_data *data)
 {
-	int	x;
-	int	y;
+	int x;
+	int y;
 	
 	y = -1;
 	while (++y < data->map.line)
@@ -44,10 +41,10 @@ void	player(t_data *data)
 		while (++x < data->map.column)
 		{
 			if (data->map.map[y][x] == 'P')
-				if (!flood_fill(data, x, y))
-					ft_error(data, "player cannot play");
-					
+			{
+				data->pos.x = x;
+				data->pos.y = y;
+			}
 		}
 	}
-	verif_count(data);
 }

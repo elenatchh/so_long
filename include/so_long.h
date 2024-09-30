@@ -6,7 +6,7 @@
 /*   By: elefonta <elefonta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 12:25:58 by elefonta          #+#    #+#             */
-/*   Updated: 2024/09/27 13:57:00 by elefonta         ###   ########.fr       */
+/*   Updated: 2024/09/30 15:05:44 by elefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,7 @@ void	verif_items(t_data *data);
 void	verif_count(t_data *data);
 void	player(t_data *data);
 void	put_img_to_img(t_image dst, t_image src, int x, int y);
+
+void	move_player(t_data *data, int x, int y);
+void	find_player(t_data *data);
 #endif

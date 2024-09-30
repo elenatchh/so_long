@@ -6,10 +6,9 @@
 /*   By: elefonta <elefonta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 09:07:59 by elefonta          #+#    #+#             */
-/*   Updated: 2024/09/27 14:06:33 by elefonta         ###   ########.fr       */
+/*   Updated: 2024/09/30 13:36:21 by elefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "so_long.h"
 
@@ -30,7 +29,7 @@ void	map_reader(t_data *data, char *argv)
 		free(tmp);
 		tmp = get_next_line(data->fd);
 		if (!tmp)
-			break;
+			break ;
 	}
 	close(data->fd);
 	data->map.line = nb_lines;
@@ -40,7 +39,7 @@ void	map_reader(t_data *data, char *argv)
 void	create_map(t_data *data, char *argv)
 {
 	int	i;
-	
+
 	i = 0;
 	data->fd = open(argv, O_RDONLY);
 	if (!data->fd)
@@ -64,33 +63,28 @@ void	create_map(t_data *data, char *argv)
 
 void	put_img(t_data *data)
 {
-	int	x;
-	int	y;
-
-	y = -1;
-	while (++y < data->map.line)
+	data->pos.y = -1;
+	while (++data->pos.y < data->map.line)
 	{
-		x = -1;
-		while (++x < data->map.column)
+		data->pos.x = -1;
+		while (++data->pos.x < data->map.column)
 		{
-			printf("coord x=%i y=%i, c=%c\n", x, y, data->map.map[y][x]);
-			if (data->map.map[y][x] == '1')
-				put_img_to_img(data->square.image,
-								data->square.wall, x * 60, y * 60);
-			if (data->map.map[y][x] == 'C')
-				put_img_to_img(data->square.image,
-								data->square.collectible, x * 60, y * 60);
-			if (data->map.map[y][x] == 'P')
-				put_img_to_img(data->square.image,
-								data->square.player, x * 60, y * 60);
-			if (data->map.map[y][x] == '0')
-				put_img_to_img(data->square.image,
-								data->square.floor, x * 60, y * 60);
-			if (data->map.map[y][x] == 'E')
-				put_img_to_img(data->square.image,
-								data->square.exit, x * 60, y * 60);
+			if (data->map.map[data->pos.y][data->pos.x] == '1')
+				put_img_to_img(data->square.image, data->square.wall,
+					data->pos.x * 60, data->pos.y * 60);
+			if (data->map.map[data->pos.y][data->pos.x] == 'C')
+				put_img_to_img(data->square.image, data->square.collectible,
+					data->pos.x * 60, data->pos.y * 60);
+			if (data->map.map[data->pos.y][data->pos.x] == 'P')
+				put_img_to_img(data->square.image, data->square.player,
+					data->pos.x * 60, data->pos.y * 60);
+			if (data->map.map[data->pos.y][data->pos.x] == '0')
+				put_img_to_img(data->square.image, data->square.floor,
+					data->pos.x * 60, data->pos.y * 60);
+			if (data->map.map[data->pos.y][data->pos.x] == 'E')
+				put_img_to_img(data->square.image, data->square.exit,
+					data->pos.x * 60, data->pos.y * 60);
 		}
 	}
 	mlx_put_image_to_window(data->mlx, data->win, data->square.image.img, 0, 0);
 }
-

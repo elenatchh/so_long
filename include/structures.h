@@ -6,7 +6,7 @@
 /*   By: elefonta <elefonta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 15:01:02 by elefonta          #+#    #+#             */
-/*   Updated: 2024/09/26 14:24:21 by elefonta         ###   ########.fr       */
+/*   Updated: 2024/09/30 13:34:28 by elefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,12 @@ typedef struct countitem
 	int			exit;
 }				t_countitem;
 
+typedef struct pos
+{
+	int x;
+	int y;
+}			t_pos; 
+
 typedef struct s_data
 {
 	void		*mlx;
@@ -59,6 +65,7 @@ typedef struct s_data
 	t_map		map;
 	t_countitem	countitem;
 	int			fd;
+	t_pos		pos;
 }				t_data;
 
 #endif
