@@ -6,7 +6,7 @@
 /*   By: elefonta <elefonta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/24 09:07:59 by elefonta          #+#    #+#             */
-/*   Updated: 2024/09/27 14:06:33 by elefonta         ###   ########.fr       */
+/*   Updated: 2024/09/26 15:19:52 by elefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,21 +73,20 @@ void	put_img(t_data *data)
 		x = -1;
 		while (++x < data->map.column)
 		{
-			printf("coord x=%i y=%i, c=%c\n", x, y, data->map.map[y][x]);
 			if (data->map.map[y][x] == '1')
-				put_img_to_img(data->square.image,
+				put_img_to_img(&data->square.image,
 								data->square.wall, x * 60, y * 60);
-			if (data->map.map[y][x] == 'C')
-				put_img_to_img(data->square.image,
+			else if (data->map.map[y][x] == 'C')
+				put_img_to_img(&data->square.image,
 								data->square.collectible, x * 60, y * 60);
-			if (data->map.map[y][x] == 'P')
-				put_img_to_img(data->square.image,
+			else if (data->map.map[y][x] == 'P')
+				put_img_to_img(&data->square.image,
 								data->square.player, x * 60, y * 60);
-			if (data->map.map[y][x] == '0')
-				put_img_to_img(data->square.image,
+			else if (data->map.map[y][x] == '0')
+				put_img_to_img(&data->square.image,
 								data->square.floor, x * 60, y * 60);
-			if (data->map.map[y][x] == 'E')
-				put_img_to_img(data->square.image,
+			else if (data->map.map[y][x] == 'E')
+				put_img_to_img(&data->square.image,
 								data->square.exit, x * 60, y * 60);
 		}
 	}

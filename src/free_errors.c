@@ -48,7 +48,7 @@ void	free_all(t_data *data)
 	if (data->mlx != NULL)
 	{
 		printf("free mlx l50\n");
-		// mlx_destroy_display(data->mlx);
+		mlx_destroy_display(data->mlx);
 		free(data->mlx);
 	}
 	if (data->map.map)

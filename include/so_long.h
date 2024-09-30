@@ -6,7 +6,7 @@
 /*   By: elefonta <elefonta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 12:25:58 by elefonta          #+#    #+#             */
-/*   Updated: 2024/09/27 13:57:00 by elefonta         ###   ########.fr       */
+/*   Updated: 2024/09/26 15:18:16 by elefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,5 +66,5 @@ void	map_verif(t_data *data, char *argv);
 void	verif_items(t_data *data);
 void	verif_count(t_data *data);
 void	player(t_data *data);
-void	put_img_to_img(t_image dst, t_image src, int x, int y);
+void	put_img_to_img(t_image *dst, t_image src, int x, int y);
 #endif

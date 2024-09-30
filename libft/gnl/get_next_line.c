@@ -3,62 +3,119 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elefonta <elefonta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbalazs <rbalazs@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/22 12:49:45 by elefonta          #+#    #+#             */
-/*   Updated: 2024/09/23 13:14:09 by elefonta         ###   ########.fr       */
+/*   Created: 2024/01/29 18:21:42 by rbalazs           #+#    #+#             */
+/*   Updated: 2024/07/06 21:24:42 by rbalazs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_next_line(char *str)
+char	*ft_createtmp(int fd, char *buffer, char *tmp)
 {
+	int		cursor;
+	char	*new_tmp;
+
+	cursor = read(fd, buffer, BUFFER_SIZE);
+	if (cursor <= 0)
+	{
+		if (cursor == 0 && tmp != NULL && *tmp != '\0')
+			return (tmp);
+		return (free(tmp), NULL);
+	}
+	buffer[cursor] = '\0';
+	new_tmp = gnl_strjoin(tmp, buffer);
+	if (!new_tmp)
+		return (free(tmp), NULL);
+	if (ft_ischr(new_tmp, '\n') == true)
+		return (new_tmp);
+	return (ft_createtmp(fd, buffer, new_tmp));
+}
+
+char	*ft_assembleline(char *tmp)
+{
+	char	*line;
 	int		i;
-	int		j;
-	char	*buf;
 
 	i = 0;
-	j = 0;
-	while (str[i] && str[i] != '\n')
+	while (tmp[i] != '\n' && tmp[i] != '\0')
 		i++;
-	if (!str[i])
-		return (free(str), NULL);
-	buf = malloc(sizeof(char) * (ft_strlens(str) - i));
-	if (!buf)
-		return (free(str), NULL);
-	j = i + 1;
+	if (tmp[i] == '\n')
+		i++;
+	line = malloc(sizeof(char) * (i + 1));
+	if (!line)
+	{
+		free(line);
+		return (NULL);
+	}
 	i = 0;
-	while (str[j])
-		buf[i++] = str[j++];
-	buf[i] = '\0';
-	return (free(str), buf);
+	while (tmp[i] != '\n' && tmp[i] != '\0')
+	{
+		line[i] = tmp[i];
+		i++;
+	}
+	if (tmp[i] == '\n')
+		line[i++] = '\n';
+	line[i] = '\0';
+	return (line);
 }
 
 char	*get_next_line(int fd)
 {
-	int			nbyte;
-	char		*tamp;
-	static char	*buffrest;
-	char		*ret;
+	static char	*tmp;
+	char		*buffer;
+	char		*line;
+	char		*new_tmp;
 
-	nbyte = 1;
-	if (fd < 0 || fd > 1024 || BUFFER_SIZE <= 0)
+	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (fd < 0 || BUFFER_SIZE <= 0 || !buffer)
 		return (NULL);
-	tamp = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (!tamp)
+	tmp = ft_createtmp(fd, buffer, tmp);
+	free(buffer);
+	if (!tmp)
 		return (NULL);
-	while (nbyte && !ft_is_new_line(buffrest))
+	line = ft_assembleline(tmp);
+	new_tmp = malloc(sizeof(char) * (gnl_strlen(tmp) - gnl_strlen(line) + 1));
+	if (!new_tmp)
+		return (free(tmp), NULL);
+	gnl_strcpy(new_tmp, tmp + gnl_strlen(line));
+	free(tmp);
+	tmp = new_tmp;
+	if (tmp[0] == '\0')
 	{
-		nbyte = read(fd, tamp, BUFFER_SIZE);
-		if (nbyte == -1)
-			return (ft_free_string(tamp));
-		tamp[nbyte] = '\0';
-		buffrest = ft_strjoin(buffrest, tamp);
-		if (!buffrest)
-			return (ft_free_string(tamp));
+		free(tmp);
+		tmp = NULL;
 	}
-	ret = ft_get_line(buffrest);
-	buffrest = ft_next_line(buffrest);
-	return (free(tamp), ret);
+	return (line);
 }
+
+/*
+int	main(void)
+{
+	int		fd;
+	char	*line;
+	int		i;
+
+	fd = open("test.md", O_RDONLY);
+	if (fd == -1)
+	{
+		perror("Error opening file");
+		return (1);
+	}
+	i = 0;
+	line = get_next_line(fd);
+	free(line);
+	while (line)
+	{
+		line = get_next_line(fd);
+		if (!line)
+			break ;
+		printf("%s", line);
+		free(line);
+		i++;
+	}
+	close(fd);
+	return (0);
+}
+*/

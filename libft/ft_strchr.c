@@ -15,9 +15,7 @@
 char	*ft_strchr(const char *s, int c)
 {
 	size_t			i;
-	unsigned char	*str;
 
-	str = (unsigned char *) s;
 	i = 0;
 	while (s[i])
 	{
@@ -39,6 +37,6 @@ char	*ft_strchr(const char *s, int c)
 int	main(void)
 {
 	char str[] = "hello world";
-	printf("%s\n", ft_strchar(str, 'w'));
+	printf("%s\n", ft_strchr(str, 'w'));
 }
 */
