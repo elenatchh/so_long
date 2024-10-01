@@ -3,98 +3,107 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: elefonta <elefonta@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rbalazs <rbalazs@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/22 12:50:45 by elefonta          #+#    #+#             */
-/*   Updated: 2024/09/23 13:13:57 by elefonta         ###   ########.fr       */
+/*   Created: 2024/01/29 18:21:46 by rbalazs           #+#    #+#             */
+/*   Updated: 2024/07/03 19:45:44 by rbalazs          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strjoin(char *s1, char *s2)
-{
-	char	*sj;
-	int		i;
-	int		j;
-
-	i = -1;
-	j = 0;
-	if (!s1)
-	{
-		s1 = malloc(sizeof(char) * 1);
-		if (!s1)
-			return (NULL);
-		s1[0] = 0;
-	}
-	if (!s1 || !s2)
-		return (NULL);
-	sj = malloc(sizeof(char) * (ft_strlens(s1) + ft_strlens(s2)) + 1);
-	if (!sj)
-		return (NULL);
-	while (s1[++i])
-		sj[i] = s1[i];
-	while (s2[j])
-		sj[i++] = s2[j++];
-	sj[i] = '\0';
-	return (free(s1), sj);
-}
-
-size_t	ft_strlens(const char *s)
-{
-	size_t	len;
-
-	len = 0;
-	if (!s)
-		return (0);
-	while (s[len])
-		len++;
-	return (len);
-}
-
-char	*ft_free_string(char *str)
-{
-	free(str);
-	return (NULL);
-}
-
-int	ft_is_new_line(char *str)
+int	gnl_strlen(const char *str)
 {
 	int	i;
 
 	i = 0;
-	if (str)
-	{
-		while (str[i])
-		{
-			if (str[i] == '\n')
-				return (1);
-			i++;
-		}
-	}
-	return (0);
+	if (!str)
+		return (0);
+	while (str[i])
+		i++;
+	return (i);
 }
 
-char	*ft_get_line(char *str)
+char	*gnl_strjoin(char *s1, const char *s2)
 {
+	char	*dest;
 	int		i;
 	int		j;
-	char	*buff;
 
 	i = 0;
 	j = 0;
-	if (!str || !str[0])
-		return (0);
-	while (str[i] && str[i] != '\n')
-		i++;
-	buff = malloc(sizeof(char) * (i + 2));
-	if (!buff)
-		return (0);
-	while (j <= i)
+	if (!s1)
 	{
-		buff[j] = str[j];
-		j++;
+		s1 = malloc(sizeof(char) * 1);
+		if (s1 == NULL)
+			return (NULL);
+		s1[0] = '\0';
 	}
-	buff[j] = '\0';
-	return (buff);
+	if (!s2)
+		return (NULL);
+	dest = malloc(sizeof(char) * (gnl_strlen(s1) + gnl_strlen(s2) + 1));
+	if (!dest)
+		return (NULL);
+	while (s1[i] != '\0')
+		dest[i++] = s1[j++];
+	j = 0;
+	while (s2[j] != '\0')
+		dest[i++] = s2[j++];
+	dest[i] = '\0';
+	return (free(s1), dest);
 }
+
+bool	ft_ischr(const char *str, int c)
+{
+	int	i;
+
+	i = 0;
+	if (!str)
+		return (false);
+	while (str[i])
+	{
+		if (str[i] == (char)c)
+			return (true);
+		i++;
+	}
+	return (false);
+}
+
+char	*gnl_strdup(const char *s1)
+{
+	char	*dup;
+	int		i;
+
+	i = 0;
+	dup = malloc(sizeof(char) * (gnl_strlen(s1) + 1));
+	if (dup == NULL)
+		return (NULL);
+	while (s1[i])
+	{
+		dup[i] = s1[i];
+		i++;
+	}
+	dup[i] = '\0';
+	return (dup);
+}
+
+char	*gnl_strcpy(char *dest, const char *src)
+{
+	int	i;
+
+	i = 0;
+	while (src[i] != '\0')
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
+}
+
+/*
+int	main(void)
+{
+	printf("%s", ft_strjoin("Salut", "Ouioui"));
+}
+*/

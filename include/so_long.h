@@ -68,6 +68,7 @@ void	verif_count(t_data *data);
 void	player(t_data *data);
 void	put_img_to_img(t_image dst, t_image src, int x, int y);
 
-void	move_player(t_data *data, int x, int y);
+
 void	find_player(t_data *data);
+void	move_player(t_data *data, int x, int y, int code_mvt);
 #endif

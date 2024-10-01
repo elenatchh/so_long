@@ -49,6 +49,7 @@ typedef struct countitem
 	int			player;
 	int			collectible;
 	int			exit;
+	int 		moves;
 }				t_countitem;
 
 typedef struct pos

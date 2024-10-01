@@ -17,10 +17,10 @@ static bool	flood_fill(t_data *data, int x, int y)
 	static int	collectible = 0;
 	static bool	exit = false;
 
-	if (data->map.copymap[y][x] == '1')
-		return (false);
 	if (data->map.copymap[y][x] == 'E')
 		exit = true;
+	if (data->map.copymap[y][x] == '1' || data->map.copymap[y][x] == 'E')
+		return (false);
 	if (data->map.copymap[y][x] == 'C')
 		collectible++;
 	data->map.copymap[y][x] = '1';

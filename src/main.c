@@ -14,9 +14,6 @@
 
 void	ft_init(t_data *data)
 {
-	int	img_size;
-
-	img_size = 60;
 	data->mlx = mlx_init();
 	if (!data->mlx)
 		ft_error(data, "error mlx pointer");
@@ -38,15 +35,18 @@ void	ft_init(t_data *data)
 int	touchexit(int key, t_data *data)
 {
 	if (key == UP)
-		move_player(data, data->pos.x, data->pos.y - 1);
+		move_player(data, data->pos.x, data->pos.y - 1, 0);
 	else if (key == DOWN)
-		move_player(data, data->pos.x, data->pos.y + 1);
+		move_player(data, data->pos.x, data->pos.y + 1, 1);
 	else if (key == RIGHT)
-		move_player(data, data->pos.x + 1, data->pos.y);
+		move_player(data, data->pos.x + 1, data->pos.y, 2);
 	else if (key == LEFT)
-		move_player(data, data->pos.x - 1, data->pos.y);
+		move_player(data, data->pos.x - 1, data->pos.y, 3);
 	else if (key == ESC)
 		exit_game(data);
+	write(1, "moves: ", 7);
+	ft_putnbr_fd(data->countitem.moves, 1);
+	write(1, "\n", 1);
 	return (0);
 }
 
@@ -88,8 +88,6 @@ int	main(int argc, char **argv)
 	load_xpm(&data);
 	put_img(&data);
 	find_player(&data);
-	printf("pos x key joueur : %d\n", data.pos.x);
-	printf("pos y key joueur : %d\n", data.pos.y);
 	mlx_hook(data.win, KEYPRESS, KeyPressMask, touchexit, &data);
 	mlx_hook(data.win, DST_N, StructureNotifyMask, exit_game, &data);
 	mlx_loop(data.mlx);
