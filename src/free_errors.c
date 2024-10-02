@@ -6,7 +6,7 @@
 /*   By: elefonta <elefonta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 15:13:28 by elefonta          #+#    #+#             */
-/*   Updated: 2024/09/30 13:39:35 by elefonta         ###   ########.fr       */
+/*   Updated: 2024/10/02 12:20:00 by elefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,3 @@ int	exit_game(t_data *data)
 	exit(EXIT_SUCCESS);
 	return (0);
 }
-// Faire fonction qui free tout le contenu de data si ce nest pas null

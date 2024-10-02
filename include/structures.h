@@ -6,7 +6,7 @@
 /*   By: elefonta <elefonta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 15:01:02 by elefonta          #+#    #+#             */
-/*   Updated: 2024/09/30 13:34:28 by elefonta         ###   ########.fr       */
+/*   Updated: 2024/10/02 11:43:28 by elefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,14 @@ typedef struct countitem
 	int			player;
 	int			collectible;
 	int			exit;
-	int 		moves;
+	int			moves;
 }				t_countitem;
 
 typedef struct pos
 {
-	int x;
-	int y;
-}			t_pos; 
+	int			x;
+	int			y;
+}				t_pos;
 
 typedef struct s_data
 {

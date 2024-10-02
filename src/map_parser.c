@@ -6,7 +6,7 @@
 /*   By: elefonta <elefonta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 15:18:09 by elefonta          #+#    #+#             */
-/*   Updated: 2024/09/30 14:58:04 by elefonta         ###   ########.fr       */
+/*   Updated: 2024/10/02 11:42:28 by elefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ static bool	flood_fill(t_data *data, int x, int y)
 
 void	player(t_data *data)
 {
-	int x;
-	int y;
-	
+	int	x;
+	int	y;
+
 	y = -1;
 	while (++y < data->map.line)
 	{
