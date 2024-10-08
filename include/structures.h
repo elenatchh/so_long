@@ -6,7 +6,7 @@
 /*   By: elefonta <elefonta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 15:01:02 by elefonta          #+#    #+#             */
-/*   Updated: 2024/10/02 11:43:28 by elefonta         ###   ########.fr       */
+/*   Updated: 2024/10/07 13:53:47 by elefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,8 @@ typedef struct s_square
 
 typedef struct map
 {
-	char		**map;
-	char		**copymap;
+	char		*map[20];
+	char		*copymap[20];
 	int			line;
 	int			column;
 }				t_map;

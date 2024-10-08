@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbalazs <rbalazs@student.42.fr>            +#+  +:+       +#+        */
+/*   By: elefonta <elefonta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:21:49 by rbalazs           #+#    #+#             */
-/*   Updated: 2024/07/03 17:52:53 by rbalazs          ###   ########.fr       */
+/*   Updated: 2024/10/07 14:07:02 by elefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <sys/types.h>
 # include <unistd.h>
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 42
+#  define BUFFER_SIZE 1
 # endif
 
 char	*get_next_line(int fd);
@@ -33,5 +33,6 @@ char	*gnl_strdup(const char *s1);
 char	*ft_assembleline(char *tmp);
 char	*ft_createtmp(int fd, char *buffer, char *tmp);
 char	*gnl_strcpy(char *dest, const char *src);
+void	ft_bzero(void *s, size_t n);
 
 #endif

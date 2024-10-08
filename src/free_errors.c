@@ -6,7 +6,7 @@
 /*   By: elefonta <elefonta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/16 15:13:28 by elefonta          #+#    #+#             */
-/*   Updated: 2024/10/02 12:20:00 by elefonta         ###   ########.fr       */
+/*   Updated: 2024/10/07 13:55:58 by elefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,8 @@ void	free_all(t_data *data)
 		mlx_destroy_display(data->mlx);
 		free(data->mlx);
 	}
-	if (data->map.map)
-		ft_free_matrix(&(data->map.map));
-	if (data->map.copymap != NULL)
-		ft_free_matrix(&(data->map.copymap));
+	ft_free_matrix(data->map.map);
+	ft_free_matrix(data->map.copymap);
 	if (data->fd != 0)
 		close(data->fd);
 }

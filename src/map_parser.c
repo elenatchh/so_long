@@ -6,7 +6,7 @@
 /*   By: elefonta <elefonta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 15:18:09 by elefonta          #+#    #+#             */
-/*   Updated: 2024/10/02 11:42:28 by elefonta         ###   ########.fr       */
+/*   Updated: 2024/10/07 13:38:42 by elefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static bool	flood_fill(t_data *data, int x, int y)
 	return (collectible == data->countitem.collectible && exit);
 }
 
-void	player(t_data *data)
+void	ft_search_player(t_data *data)
 {
 	int	x;
 	int	y;
@@ -90,7 +90,7 @@ void	verif_items(t_data *data)
 	verif_count(data);
 }
 
-void	map_verif(t_data *data, char *argv)
+void	check_extension(t_data *data, char *argv)
 {
 	int	len;
 

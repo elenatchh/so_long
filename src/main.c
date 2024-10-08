@@ -6,13 +6,13 @@
 /*   By: elefonta <elefonta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/13 10:37:31 by elefonta          #+#    #+#             */
-/*   Updated: 2024/10/02 11:42:47 by elefonta         ###   ########.fr       */
+/*   Updated: 2024/10/08 12:55:38 by elefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void	ft_init(t_data *data)
+void	ft_init_mlx(t_data *data)
 {
 	data->mlx = mlx_init();
 	if (!data->mlx)
@@ -32,15 +32,15 @@ void	ft_init(t_data *data)
 			&(data->square.image.endian));
 }
 
-int	touchexit(int key, t_data *data)
+int	key_handler(int key, t_data *data)
 {
-	if (key == UP)
+	if (key == UP || key == W)
 		move_player(data, data->pos.x, data->pos.y - 1, 0);
-	else if (key == DOWN)
+	else if (key == DOWN || key == S)
 		move_player(data, data->pos.x, data->pos.y + 1, 1);
-	else if (key == RIGHT)
+	else if (key == RIGHT || key == D)
 		move_player(data, data->pos.x + 1, data->pos.y, 2);
-	else if (key == LEFT)
+	else if (key == LEFT || key == A)
 		move_player(data, data->pos.x - 1, data->pos.y, 3);
 	else if (key == ESC)
 		exit_game(data);
@@ -80,15 +80,15 @@ int	main(int argc, char **argv)
 	ft_bzero(&data, sizeof(t_data));
 	if (argc != 2)
 		ft_error(&data, "mauvais nombre d'args");
-	map_verif(&data, argv[1]);
-	map_reader(&data, argv[1]);
+	check_extension(&data, argv[1]);
+	create_map(&data, argv[1]);
 	verif_items(&data);
-	player(&data);
-	ft_init(&data);
+	ft_search_player(&data);
+	ft_init_mlx(&data);
 	load_xpm(&data);
 	put_img(&data);
 	find_player(&data);
-	mlx_hook(data.win, KEYPRESS, KeyPressMask, touchexit, &data);
+	mlx_hook(data.win, KEYPRESS, KeyPressMask, key_handler, &data);
 	mlx_hook(data.win, DST_N, StructureNotifyMask, exit_game, &data);
 	mlx_loop(data.mlx);
 	return (EXIT_SUCCESS);

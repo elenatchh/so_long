@@ -6,7 +6,7 @@
 /*   By: elefonta <elefonta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/01 12:25:58 by elefonta          #+#    #+#             */
-/*   Updated: 2024/10/02 11:43:10 by elefonta         ###   ########.fr       */
+/*   Updated: 2024/10/07 13:55:19 by elefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,16 @@ void	destroy_img(t_data *data);
 void	map_reader(t_data *data, char *argv);
 void	create_map(t_data *data, char *argv);
 void	put_img(t_data *data);
-void	map_verif(t_data *data, char *argv);
+void	check_extension(t_data *data, char *argv);
 
 void	verif_items(t_data *data);
 void	verif_count(t_data *data);
-void	player(t_data *data);
+void	ft_search_player(t_data *data);
 void	put_img_to_img(t_image dst, t_image src, int x, int y);
 
 void	find_player(t_data *data);
 void	move_player(t_data *data, int x, int y, int code_mvt);
+
+void	ft_free_matrix(char *str[20]);
+
 #endif

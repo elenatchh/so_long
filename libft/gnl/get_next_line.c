@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rbalazs <rbalazs@student.42.fr>            +#+  +:+       +#+        */
+/*   By: elefonta <elefonta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/29 18:21:42 by rbalazs           #+#    #+#             */
-/*   Updated: 2024/07/06 21:24:42 by rbalazs          ###   ########.fr       */
+/*   Updated: 2024/10/07 14:13:14 by elefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,11 @@ char	*get_next_line(int fd)
 	char		*line;
 	char		*new_tmp;
 
+	if (fd < 0)
+		free(tmp);
 	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (fd < 0 || BUFFER_SIZE <= 0 || !buffer)
-		return (NULL);
+		return (free(buffer), NULL);
 	tmp = ft_createtmp(fd, buffer, tmp);
 	free(buffer);
 	if (!tmp)
@@ -79,14 +81,10 @@ char	*get_next_line(int fd)
 	new_tmp = malloc(sizeof(char) * (gnl_strlen(tmp) - gnl_strlen(line) + 1));
 	if (!new_tmp)
 		return (free(tmp), NULL);
-	gnl_strcpy(new_tmp, tmp + gnl_strlen(line));
-	free(tmp);
+	(gnl_strcpy(new_tmp, tmp + gnl_strlen(line)), free(tmp));
 	tmp = new_tmp;
 	if (tmp[0] == '\0')
-	{
-		free(tmp);
-		tmp = NULL;
-	}
+		(free(tmp), tmp = NULL);
 	return (line);
 }
 

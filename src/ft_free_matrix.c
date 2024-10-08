@@ -6,24 +6,20 @@
 /*   By: elefonta <elefonta@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 15:35:27 by elefonta          #+#    #+#             */
-/*   Updated: 2024/09/25 17:48:40 by elefonta         ###   ########.fr       */
+/*   Updated: 2024/10/07 15:10:05 by elefonta         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_free_matrix(char ***str)
+void	ft_free_matrix(char *str[20])
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
-	if (!(*str))
-		return ;
-	while ((*str)[i])
+	while ((str)[i])
 	{
-		free((*str)[i]);
+		free((str)[i]);
 		i++;
 	}
-	free(*str);
-	*str = NULL;
 }
